@@ -7,7 +7,7 @@ import dev.gegy.whats_that_slot.ui.SlotQueryingScreen;
 import dev.gegy.whats_that_slot.ui.state.SlotQueryController;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.input.MouseButtonEvent;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -39,8 +39,8 @@ public class AbstractContainerScreenMixin implements SlotQueryingScreen {
         this.querySlot = null;
     }
 
-    @Inject(method = "renderContents(Lnet/minecraft/client/gui/GuiGraphics;IIF)V", at = @At("RETURN"))
-    private void captureAndClearFocusedSlot(GuiGraphics graphics, int mouseX, int mouseY, float delta, CallbackInfo ci) {
+    @Inject(method = "extractContents(Lnet/minecraft/client/gui/GuiGraphicsExtractor;IIF)V", at = @At("RETURN"))
+    private void captureAndClearFocusedSlot(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float delta, CallbackInfo ci) {
         this.querySlot = this.hoveredSlot;
         if (this.queryController.isActive()) {
             this.hoveredSlot = null;
@@ -54,8 +54,8 @@ public class AbstractContainerScreenMixin implements SlotQueryingScreen {
         this.queryController.tick(this.querySlot, SlotQueryInput.isRequestingQuery(window) && carriedItem.isEmpty());
     }
 
-    @Inject(method = "renderTooltip(Lnet/minecraft/client/gui/GuiGraphics;II)V", at = @At("HEAD"))
-    private void drawQueryDisplay(GuiGraphics graphics, int mouseX, int mouseY, CallbackInfo ci) {
+    @Inject(method = "extractTooltip(Lnet/minecraft/client/gui/GuiGraphicsExtractor;II)V", at = @At("HEAD"))
+    private void drawQueryDisplay(GuiGraphicsExtractor graphics, int mouseX, int mouseY, CallbackInfo ci) {
         float delta = Minecraft.getInstance().getDeltaTracker().getRealtimeDeltaTicks();
         this.queryController.draw(graphics, mouseX, mouseY, delta);
     }

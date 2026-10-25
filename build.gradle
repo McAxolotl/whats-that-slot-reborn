@@ -1,6 +1,6 @@
 plugins {
   id 'net.neoforged.moddev' version '2.0.148' apply false
-  id 'net.fabricmc.fabric-loom-remap' version '1.17.21' apply false
+  id 'net.fabricmc.fabric-loom' version '1.17.21' apply false
   id 'idea'
 }
 
@@ -11,7 +11,7 @@ subprojects {
   version = "$mod_version+$minecraft_version" + (release.toBoolean() ? "" : "-beta")
 
   java {
-    toolchain.languageVersion = JavaLanguageVersion.of(21)
+    toolchain.languageVersion = JavaLanguageVersion.of(25)
     withSourcesJar()
   }
 
@@ -21,7 +21,7 @@ subprojects {
 
   tasks.withType(JavaCompile).configureEach {
     it.options.encoding = 'UTF-8'
-    it.options.release = 21
+    it.options.release = 25
   }
 
   dependencies {

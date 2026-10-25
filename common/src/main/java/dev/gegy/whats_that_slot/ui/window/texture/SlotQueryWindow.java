@@ -2,7 +2,7 @@ package dev.gegy.whats_that_slot.ui.window.texture;
 
 import dev.gegy.whats_that_slot.ui.Bounds2i;
 import dev.gegy.whats_that_slot.ui.HoveredItem;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.world.inventory.Slot;
 
@@ -20,7 +20,7 @@ public interface SlotQueryWindow {
         return Bounds2i.shiftToFitInScreen(screen, bounds);
     }
 
-    void draw(GuiGraphics graphics, int mouseX, int mouseY);
+    void draw(GuiGraphicsExtractor graphics, int mouseX, int mouseY);
 
     default boolean mouseClicked(double mouseX, double mouseY) {
         return false;

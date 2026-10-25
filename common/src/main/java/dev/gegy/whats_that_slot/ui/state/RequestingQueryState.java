@@ -4,7 +4,7 @@ import dev.gegy.whats_that_slot.query.SlotQuery;
 import dev.gegy.whats_that_slot.query.SlotQueryGenerator;
 import dev.gegy.whats_that_slot.ui.SlotQueryInput;
 import dev.gegy.whats_that_slot.ui.SlotQueryProgressBar;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.world.inventory.Slot;
 
@@ -49,7 +49,7 @@ public final class RequestingQueryState implements SlotQueryState {
     }
 
     @Override
-    public void draw(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
+    public void draw(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float delta) {
         float queryProgress = this.getQueryProgress(delta);
         this.progressBar.draw(graphics, queryProgress);
     }

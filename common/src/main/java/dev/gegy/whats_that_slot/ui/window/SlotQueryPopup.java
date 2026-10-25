@@ -6,7 +6,7 @@ import dev.gegy.whats_that_slot.ui.HoveredItem;
 import dev.gegy.whats_that_slot.ui.window.texture.ScrolledSlotQueryWindow;
 import dev.gegy.whats_that_slot.ui.window.texture.SlotQueryWindow;
 import dev.gegy.whats_that_slot.ui.window.texture.StaticSlotQueryWindow;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.world.inventory.Slot;
@@ -43,7 +43,7 @@ public final class SlotQueryPopup {
         }
     }
 
-    public void draw(GuiGraphics graphics, int mouseX, int mouseY) {
+    public void draw(GuiGraphicsExtractor graphics, int mouseX, int mouseY) {
         graphics.nextStratum();
         graphics.pose().pushMatrix();
         graphics.pose().translate(this.bounds.x0(), this.bounds.y0());

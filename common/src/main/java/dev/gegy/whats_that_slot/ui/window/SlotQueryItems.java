@@ -5,7 +5,7 @@ import dev.gegy.whats_that_slot.ui.Bounds2i;
 import dev.gegy.whats_that_slot.ui.HoveredItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.Identifier;
@@ -37,7 +37,7 @@ public final class SlotQueryItems {
         this.scrollIndexOffset = Mth.floor(scroll) * this.grid.countX();
     }
 
-    public void drawItems(GuiGraphics graphics, int mouseX, int mouseY) {
+    public void drawItems(GuiGraphicsExtractor graphics, int mouseX, int mouseY) {
         var player = CLIENT.player;
         var font = CLIENT.font;
 
@@ -68,13 +68,13 @@ public final class SlotQueryItems {
         graphics.pose().popMatrix();
     }
 
-    private void drawItemSlot(GuiGraphics graphics, Font font, LocalPlayer player, QueriedItem item, int x, int y) {
+    private void drawItemSlot(GuiGraphicsExtractor graphics, Font font, LocalPlayer player, QueriedItem item, int x, int y) {
         if (item.highlighted()) {
             graphics.fillGradient(x, y, x + 16, y + 16, HIGHLIGHT_COLOR, HIGHLIGHT_COLOR);
         }
 
-        graphics.renderItem(player, item.itemStack(), x, y, 0);
-        graphics.renderItemDecorations(font, item.itemStack(), x, y);
+        graphics.item(player, item.itemStack(), x, y, 0);
+        graphics.itemDecorations(font, item.itemStack(), x, y);
     }
 
     @Nullable

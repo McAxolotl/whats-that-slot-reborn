@@ -3,7 +3,7 @@ package dev.gegy.whats_that_slot.ui.action;
 import dev.gegy.whats_that_slot.mixin.AbstractContainerScreenAccess;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.world.inventory.ClickType;
+import net.minecraft.world.inventory.ContainerInput;
 import net.minecraft.world.inventory.Slot;
 import org.lwjgl.glfw.GLFW;
 
@@ -30,7 +30,7 @@ public final class ScreenSlotActions {
 
     public ScreenSlotActions clickSlot(Slot slot) {
         this.actions.add((screen, screenAccess) -> {
-            screenAccess.invokeSlotClicked(slot, slot.index, GLFW.GLFW_MOUSE_BUTTON_LEFT, ClickType.PICKUP);
+            screenAccess.invokeSlotClicked(slot, slot.index, GLFW.GLFW_MOUSE_BUTTON_LEFT, ContainerInput.PICKUP);
         });
         return this;
     }

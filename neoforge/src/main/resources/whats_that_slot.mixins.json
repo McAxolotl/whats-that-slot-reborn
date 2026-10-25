@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "dev.gegy.whats_that_slot.mixin",
+  "compatibilityLevel": "JAVA_25",
+  "client": [
+    "AbstractContainerScreenAccess",
+    "AbstractContainerScreenMixin",
+    "AbstractFurnaceMenuAccess",
+    "MouseHandlerMixin",
+    "jei.JeiScreenHelperMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

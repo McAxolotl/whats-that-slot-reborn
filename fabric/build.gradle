@@ -1,5 +1,5 @@
 plugins {
-  id 'net.fabricmc.fabric-loom-remap'
+  id 'net.fabricmc.fabric-loom'
 }
 
 base {
@@ -7,10 +7,7 @@ base {
 }
 
 loom {
-  mixin {
-    useLegacyMixinAp.set(true)
-    defaultRefmapName.set("${mod_id}.refmap.json")
-  }
+
   runs {
     client {
       client()
@@ -54,28 +51,26 @@ sourceSets.main.resources.srcDir rootProject.file('common/src/main/resources')
 
 dependencies {
   minecraft "com.mojang:minecraft:$minecraft_version"
-  mappings loom.officialMojangMappings()
 
-  modImplementation "net.fabricmc:fabric-loader:$fabric_loader_version"
-  modImplementation(include(fabricApi.module("fabric-api-base", fabric_version)))
-  modImplementation(include(fabricApi.module("fabric-resource-loader-v1", fabric_version)))
-  modImplementation(include(fabricApi.module("fabric-resource-loader-v0", fabric_version)))
+  implementation "net.fabricmc:fabric-loader:$fabric_loader_version"
+  implementation(include(fabricApi.module("fabric-api-base", fabric_version)))
+  implementation(include(fabricApi.module("fabric-resource-loader-v1", fabric_version)))
 
-  modCompileOnly("me.shedaniel:RoughlyEnoughItems-api-fabric:$rei_version") { transitive = false }
-  modCompileOnly("dev.architectury:architectury-fabric:$architectury_version") { transitive = false }
+  compileOnly("me.shedaniel:RoughlyEnoughItems-api-fabric:$rei_version") { transitive = false }
+  compileOnly("dev.architectury:architectury-fabric:$architectury_version") { transitive = false }
   compileOnly "me.shedaniel.cloth:basic-math:$cloth_version"
-  modCompileOnly("mezz.jei:jei-$jei_minecraft_version-common-api:$jei_version") { transitive = false }
+  compileOnly("mezz.jei:jei-$jei_minecraft_version-common-api:$jei_version") { transitive = false }
 
   if (providers.gradleProperty('withRei').get().toBoolean() || providers.gradleProperty('withJei').get().toBoolean()) {
-    modLocalRuntime "net.fabricmc.fabric-api:fabric-api:$fabric_version"
+    runtimeOnly "net.fabricmc.fabric-api:fabric-api:$fabric_version"
   }
 
   if (providers.gradleProperty('withJei').get().toBoolean()) {
-    modLocalRuntime "mezz.jei:jei-$jei_minecraft_version-fabric:$jei_version"
+    runtimeOnly "mezz.jei:jei-$jei_minecraft_version-fabric:$jei_version"
   }
 
   if (providers.gradleProperty('withRei').get().toBoolean()) {
-    modLocalRuntime "dev.architectury:architectury-fabric:$architectury_version"
-    modLocalRuntime "me.shedaniel:RoughlyEnoughItems-fabric:$rei_version"
+    runtimeOnly "dev.architectury:architectury-fabric:$architectury_version"
+    runtimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:$rei_version"
   }
 }

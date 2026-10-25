@@ -2,7 +2,7 @@ package dev.gegy.whats_that_slot.ui.state;
 
 import dev.gegy.whats_that_slot.ui.HoveredItem;
 import dev.gegy.whats_that_slot.ui.Bounds2i;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.inventory.Slot;
@@ -27,7 +27,7 @@ public final class SlotQueryController {
         this.state = this.state.tick(hoveredSlot, requestingQuery);
     }
 
-    public void draw(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
+    public void draw(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float delta) {
         this.state.draw(graphics, mouseX, mouseY, delta);
     }
 

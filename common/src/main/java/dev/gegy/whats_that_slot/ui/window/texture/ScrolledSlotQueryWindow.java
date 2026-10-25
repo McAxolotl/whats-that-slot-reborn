@@ -9,7 +9,7 @@ import dev.gegy.whats_that_slot.ui.scroll.Scrollbar;
 import dev.gegy.whats_that_slot.ui.window.SlotGridLayout;
 import dev.gegy.whats_that_slot.ui.window.SlotQueryActions;
 import dev.gegy.whats_that_slot.ui.window.SlotQueryItems;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
@@ -61,18 +61,18 @@ public final class ScrolledSlotQueryWindow implements SlotQueryWindow {
     }
 
     @Override
-    public void draw(GuiGraphics graphics, int mouseX, int mouseY) {
+    public void draw(GuiGraphicsExtractor graphics, int mouseX, int mouseY) {
         this.drawBackground(graphics);
         this.drawScroller(graphics);
 
         this.items.drawItems(graphics, mouseX, mouseY);
     }
 
-    private void drawBackground(GuiGraphics graphics) {
+    private void drawBackground(GuiGraphicsExtractor graphics) {
         graphics.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, 0, 0, 0, 0, WIDTH, HEIGHT, TEXTURE_HEIGHT, TEXTURE_WIDTH);
     }
 
-    private void drawScroller(GuiGraphics graphics) {
+    private void drawScroller(GuiGraphicsExtractor graphics) {
         var scroller = this.scrollView.scrollerFromTop(this.scrollbar, this.scrollerBounds);
 
         this.blitSprite(graphics, scroller, this.selectedScroller ? SCROLLER_SELECTED_SPRITE : SCROLLER_SPRITE);
@@ -145,7 +145,7 @@ public final class ScrolledSlotQueryWindow implements SlotQueryWindow {
         return this.items.getHoveredItemAt(x, y);
     }
 
-    private void blitSprite(GuiGraphics graphics, Bounds2i bounds, Identifier sprite) {
+    private void blitSprite(GuiGraphicsExtractor graphics, Bounds2i bounds, Identifier sprite) {
         graphics.blitSprite(RenderPipelines.GUI_TEXTURED, sprite, bounds.x0(), bounds.y0(), bounds.width(), bounds.height());
     }
 }

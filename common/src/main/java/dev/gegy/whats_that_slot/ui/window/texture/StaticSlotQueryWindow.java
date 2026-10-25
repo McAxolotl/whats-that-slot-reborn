@@ -7,7 +7,7 @@ import dev.gegy.whats_that_slot.ui.HoveredItem;
 import dev.gegy.whats_that_slot.ui.window.SlotGridLayout;
 import dev.gegy.whats_that_slot.ui.window.SlotQueryActions;
 import dev.gegy.whats_that_slot.ui.window.SlotQueryItems;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.Identifier;
 
@@ -40,13 +40,13 @@ public final class StaticSlotQueryWindow implements SlotQueryWindow {
     }
 
     @Override
-    public void draw(GuiGraphics graphics, int mouseX, int mouseY) {
+    public void draw(GuiGraphicsExtractor graphics, int mouseX, int mouseY) {
         this.drawBackground(graphics);
 
         this.items.drawItems(graphics, mouseX, mouseY);
     }
 
-    private void drawBackground(GuiGraphics graphics) {
+    private void drawBackground(GuiGraphicsExtractor graphics) {
         graphics.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, 0, 0, 0, 0, WIDTH, BORDER, TEXTURE_HEIGHT, TEXTURE_WIDTH);
 
         for (int i = 0; i < this.grid.countY(); i++) {

@@ -2,7 +2,7 @@ package dev.gegy.whats_that_slot.ui.state;
 
 import dev.gegy.whats_that_slot.ui.HoveredItem;
 import dev.gegy.whats_that_slot.ui.Bounds2i;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.inventory.Slot;
 
@@ -13,7 +13,7 @@ public interface SlotQueryState {
     @Nonnull
     SlotQueryState tick(@Nullable Slot focusedSlot, boolean requestingQuery);
 
-    void draw(GuiGraphics graphics, int mouseX, int mouseY, float delta);
+    void draw(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float delta);
 
     default InteractionResult isSlotSelected(Slot slot, double mouseX, double mouseY) {
         return InteractionResult.PASS;
