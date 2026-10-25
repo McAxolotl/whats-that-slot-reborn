@@ -1,0 +1,63 @@
+plugins {
+  id 'net.neoforged.moddev'
+}
+
+base {
+  archivesName = "$mod_file_name-neoforge"
+}
+
+neoForge {
+  version = neoforge_version
+
+  runs {
+    configureEach {
+      gameDirectory = rootProject.file("run/$minecraft_version/neoforge")
+      logLevel = org.slf4j.event.Level.INFO
+    }
+    client {
+      client()
+      programArguments.addAll '--username', 'Dev###'
+    }
+  }
+
+  mods {
+    "${mod_id}" {
+      sourceSet project.sourceSets.main
+    }
+  }
+}
+
+repositories {
+  maven {
+    url "https://maven.shedaniel.me"
+    content { includeGroupByRegex 'me\\.shedaniel.*' }
+  }
+  maven {
+    url "https://maven.architectury.dev"
+    content { includeGroup 'dev.architectury' }
+  }
+  maven {
+    url "https://maven.blamejared.com"
+    content { includeGroup 'mezz.jei' }
+  }
+}
+
+sourceSets.main.java.srcDirs rootProject.file('common/src/main/java'), rootProject.file('common/src/rei/java')
+sourceSets.main.resources.srcDir rootProject.file('common/src/main/resources')
+
+dependencies {
+  implementation "net.neoforged:neoforge:$neoforge_version"
+
+  compileOnly "mezz.jei:jei-$minecraft_version-common-api:$jei_version"
+  if (providers.gradleProperty('withJei').get().toBoolean()) {
+    runtimeOnly "mezz.jei:jei-$minecraft_version-neoforge:$jei_version"
+  }
+
+  compileOnly("me.shedaniel:RoughlyEnoughItems-api-neoforge:$rei_version") { transitive = false }
+  compileOnly("dev.architectury:architectury-neoforge:$architectury_version") { transitive = false }
+  compileOnly "me.shedaniel.cloth:basic-math:$cloth_version"
+
+  if (providers.gradleProperty('withRei').get().toBoolean()) {
+    runtimeOnly "me.shedaniel:RoughlyEnoughItems-neoforge:$rei_version"
+  }
+}

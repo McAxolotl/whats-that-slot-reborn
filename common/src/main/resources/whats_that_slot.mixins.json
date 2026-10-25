@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "dev.gegy.whats_that_slot.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "AbstractContainerScreenAccess",
+    "AbstractContainerScreenMixin",
+    "AbstractFurnaceMenuAccess",
+    "MouseHandlerMixin",
+    "rei.ReiScreenRegistryMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "refmap": "whats_that_slot.refmap.json"
+}
