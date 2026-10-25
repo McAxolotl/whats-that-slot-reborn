@@ -6,12 +6,10 @@ import dev.gegy.whats_that_slot.ui.HoveredItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -43,8 +41,7 @@ public final class SlotQueryItems {
         var player = CLIENT.player;
         var font = CLIENT.font;
 
-        graphics.pose().pushPose();
-        graphics.pose().translate(0.0, 0.0, SlotQueryPopup.BLIT_OFFSET);
+        graphics.pose().pushMatrix();
 
         int focusedSlotX = this.slotX(mouseX);
         int focusedSlotY = this.slotY(mouseY);
@@ -52,7 +49,7 @@ public final class SlotQueryItems {
         int focusedSlotScreenY = this.screenY(focusedSlotY);
 
         if (this.grid.contains(focusedSlotX, focusedSlotY)) {
-            graphics.blitSprite(RenderType::guiTexturedOverlay, SLOT_HIGHLIGHT_BACK_SPRITE, focusedSlotScreenX - 4, focusedSlotScreenY - 4, 24, 24);
+            graphics.blitSprite(RenderPipelines.GUI_TEXTURED, SLOT_HIGHLIGHT_BACK_SPRITE, focusedSlotScreenX - 4, focusedSlotScreenY - 4, 24, 24);
         }
 
         this.grid.forEach((index, slotX, slotY) -> {
@@ -65,11 +62,10 @@ public final class SlotQueryItems {
         });
 
         if (this.grid.contains(focusedSlotX, focusedSlotY)) {
-            graphics.blitSprite(RenderType::guiTexturedOverlay, SLOT_HIGHLIGHT_FRONT_SPRITE, focusedSlotScreenX - 4, focusedSlotScreenY - 4, 24, 24);
-            this.drawSlotTooltip(graphics, mouseX, mouseY, focusedSlotX, focusedSlotY);
+            graphics.blitSprite(RenderPipelines.GUI_TEXTURED, SLOT_HIGHLIGHT_FRONT_SPRITE, focusedSlotScreenX - 4, focusedSlotScreenY - 4, 24, 24);
         }
 
-        graphics.pose().popPose();
+        graphics.pose().popMatrix();
     }
 
     private void drawItemSlot(GuiGraphics graphics, Font font, LocalPlayer player, QueriedItem item, int x, int y) {
@@ -79,22 +75,6 @@ public final class SlotQueryItems {
 
         graphics.renderItem(player, item.itemStack(), x, y, 0);
         graphics.renderItemDecorations(font, item.itemStack(), x, y);
-    }
-
-    private void drawSlotTooltip(GuiGraphics graphics, int mouseX, int mouseY, int slotX, int slotY) {
-        var item = this.getItemInSlot(slotX, slotY);
-        if (item != null) {
-            this.renderItemTooltip(graphics, mouseX, mouseY, item.itemStack());
-        }
-    }
-
-    private void renderItemTooltip(GuiGraphics graphics, int mouseX, int mouseY, ItemStack item) {
-        var screen = CLIENT.screen;
-        if (screen != null) {
-            var tooltip = Screen.getTooltipFromItem(CLIENT, item);
-            var tooltipData = item.getTooltipImage();
-            graphics.renderTooltip(CLIENT.font, tooltip, tooltipData, mouseX, mouseY);
-        }
     }
 
     @Nullable

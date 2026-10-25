@@ -7,6 +7,7 @@ import dev.gegy.whats_that_slot.ui.window.texture.ScrolledSlotQueryWindow;
 import dev.gegy.whats_that_slot.ui.window.texture.SlotQueryWindow;
 import dev.gegy.whats_that_slot.ui.window.texture.StaticSlotQueryWindow;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.world.inventory.Slot;
 
@@ -14,8 +15,6 @@ import javax.annotation.Nullable;
 
 // TODO: we can group together stacks from the same item if they all apply
 public final class SlotQueryPopup {
-    public static final int BLIT_OFFSET = 400;
-
     public static final int SLOTS_COUNT_X = 5;
     public static final int MAX_SLOTS_COUNT_Y = 5;
 
@@ -45,11 +44,18 @@ public final class SlotQueryPopup {
     }
 
     public void draw(GuiGraphics graphics, int mouseX, int mouseY) {
-        graphics.pose().pushPose();
-        graphics.pose().translate(this.bounds.x0(), this.bounds.y0(), BLIT_OFFSET);
+        graphics.nextStratum();
+        graphics.pose().pushMatrix();
+        graphics.pose().translate(this.bounds.x0(), this.bounds.y0());
 
         this.window.draw(graphics, mouseX - this.bounds.x0(), mouseY - this.bounds.y0());
-        graphics.pose().popPose();
+        graphics.pose().popMatrix();
+
+        // Deferred tooltips use absolute screen coordinates, outside the popup transform.
+        var hovered = this.getHoveredItemAt(mouseX, mouseY);
+        if (hovered != null) {
+            graphics.setTooltipForNextFrame(Minecraft.getInstance().font, hovered.stack(), mouseX, mouseY);
+        }
     }
 
     public boolean isSelected(double mouseX, double mouseY) {

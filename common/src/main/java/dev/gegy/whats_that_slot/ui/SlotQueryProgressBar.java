@@ -2,7 +2,6 @@ package dev.gegy.whats_that_slot.ui;
 
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.inventory.Slot;
 
 public final class SlotQueryProgressBar {
@@ -27,7 +26,7 @@ public final class SlotQueryProgressBar {
         if (displayProgress > 0.0F) {
             int x1 = this.x0 + Math.round(WIDTH * displayProgress);
             int y1 = this.y0 + HEIGHT;
-            graphics.fill(RenderType.guiOverlay(), this.x0, this.y0, x1, y1, COLOR);
+            graphics.fill(this.x0, this.y0, x1, y1, COLOR);
         }
     }
 

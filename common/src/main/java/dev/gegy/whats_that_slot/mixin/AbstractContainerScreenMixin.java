@@ -38,7 +38,7 @@ public class AbstractContainerScreenMixin implements SlotQueryingScreen {
         this.querySlot = null;
     }
 
-    @Inject(method = "render(Lnet/minecraft/client/gui/GuiGraphics;IIF)V", at = @At("RETURN"))
+    @Inject(method = "renderContents(Lnet/minecraft/client/gui/GuiGraphics;IIF)V", at = @At("RETURN"))
     private void captureAndClearFocusedSlot(GuiGraphics graphics, int mouseX, int mouseY, float delta, CallbackInfo ci) {
         this.querySlot = this.hoveredSlot;
         if (this.queryController.isActive()) {

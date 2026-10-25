@@ -10,7 +10,7 @@ import dev.gegy.whats_that_slot.ui.window.SlotGridLayout;
 import dev.gegy.whats_that_slot.ui.window.SlotQueryActions;
 import dev.gegy.whats_that_slot.ui.window.SlotQueryItems;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
@@ -69,7 +69,7 @@ public final class ScrolledSlotQueryWindow implements SlotQueryWindow {
     }
 
     private void drawBackground(GuiGraphics graphics) {
-        graphics.blit(RenderType::guiTextured, TEXTURE, 0, 0, 0, 0, WIDTH, HEIGHT, TEXTURE_HEIGHT, TEXTURE_WIDTH);
+        graphics.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, 0, 0, 0, 0, WIDTH, HEIGHT, TEXTURE_HEIGHT, TEXTURE_WIDTH);
     }
 
     private void drawScroller(GuiGraphics graphics) {
@@ -146,6 +146,6 @@ public final class ScrolledSlotQueryWindow implements SlotQueryWindow {
     }
 
     private void blitSprite(GuiGraphics graphics, Bounds2i bounds, ResourceLocation sprite) {
-        graphics.blitSprite(RenderType::guiTextured, sprite, bounds.x0(), bounds.y0(), bounds.width(), bounds.height());
+        graphics.blitSprite(RenderPipelines.GUI_TEXTURED, sprite, bounds.x0(), bounds.y0(), bounds.width(), bounds.height());
     }
 }
