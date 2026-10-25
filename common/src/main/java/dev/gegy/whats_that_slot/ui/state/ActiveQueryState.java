@@ -1,5 +1,6 @@
 package dev.gegy.whats_that_slot.ui.state;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import dev.gegy.whats_that_slot.query.SlotQuery;
 import dev.gegy.whats_that_slot.ui.HoveredItem;
 import dev.gegy.whats_that_slot.ui.Bounds2i;
@@ -52,7 +53,7 @@ public final class ActiveQueryState implements SlotQueryState {
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        return button == 0 ? this.window.mouseClicked(mouseX, mouseY) : this.window.isSelected(mouseX, mouseY);
+        return button == InputConstants.MOUSE_BUTTON_LEFT ? this.window.mouseClicked(mouseX, mouseY) : this.window.isSelected(mouseX, mouseY);
     }
 
     @Override

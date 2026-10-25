@@ -5,13 +5,15 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.world.inventory.ContainerInput;
 import net.minecraft.world.inventory.Slot;
-import org.lwjgl.glfw.GLFW;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 public final class ScreenSlotActions {
+    // Container clicks use protocol button 0 for primary, independent of native mouse IDs.
+    private static final int PRIMARY_CONTAINER_CLICK = 0;
+
     private final List<Action> actions = new ArrayList<>();
 
     public ScreenSlotActions swapStacks(Slot sourceSlot, Slot targetSlot) {
@@ -30,7 +32,7 @@ public final class ScreenSlotActions {
 
     public ScreenSlotActions clickSlot(Slot slot) {
         this.actions.add((screen, screenAccess) -> {
-            screenAccess.invokeSlotClicked(slot, slot.index, GLFW.GLFW_MOUSE_BUTTON_LEFT, ContainerInput.PICKUP);
+            screenAccess.invokeSlotClicked(slot, slot.index, PRIMARY_CONTAINER_CLICK, ContainerInput.PICKUP);
         });
         return this;
     }

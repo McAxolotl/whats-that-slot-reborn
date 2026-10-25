@@ -7,7 +7,7 @@ import net.minecraft.client.MouseHandler;
 import net.minecraft.client.input.MouseButtonInfo;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
-import org.lwjgl.glfw.GLFW;
+import com.mojang.blaze3d.platform.InputConstants;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -31,14 +31,14 @@ public class MouseHandlerMixin {
         if (this.minecraft.gui.overlay() != null || !(this.minecraft.gui.screen() instanceof SlotQueryingScreen screen)) {
             return;
         }
-        // Vanilla normalizes simulated right clicks before updating activeButton.
+        // Use the button tracked by the game input handler when available.
         int button = this.activeButton != null ? this.activeButton.button() : buttonInfo.button();
         var window = this.minecraft.getWindow();
         double x = this.minecraft.mouseHandler.getScaledXPos(window);
         double y = this.minecraft.mouseHandler.getScaledYPos(window);
-        boolean consumed = action == GLFW.GLFW_PRESS
+        boolean consumed = action == InputConstants.PRESS
                 ? screen.whats_that_slot$mouseClicked(x, y, button)
-                : action == GLFW.GLFW_RELEASE && screen.whats_that_slot$mouseReleased(x, y, button);
+                : action == InputConstants.RELEASE && screen.whats_that_slot$mouseReleased(x, y, button);
         if (consumed) {
             this.minecraft.gui.screen().afterMouseAction();
             ci.cancel();
