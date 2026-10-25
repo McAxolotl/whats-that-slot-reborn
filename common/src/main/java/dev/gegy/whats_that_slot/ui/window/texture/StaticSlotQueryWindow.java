@@ -9,12 +9,12 @@ import dev.gegy.whats_that_slot.ui.window.SlotQueryActions;
 import dev.gegy.whats_that_slot.ui.window.SlotQueryItems;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.RenderPipelines;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import javax.annotation.Nullable;
 
 public final class StaticSlotQueryWindow implements SlotQueryWindow {
-    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(WhatsThatSlot.ID, "textures/gui/static_window.png");
+    private static final Identifier TEXTURE = Identifier.fromNamespaceAndPath(WhatsThatSlot.ID, "textures/gui/static_window.png");
 
     private static final int TEXTURE_WIDTH = 128;
     private static final int TEXTURE_HEIGHT = 128;

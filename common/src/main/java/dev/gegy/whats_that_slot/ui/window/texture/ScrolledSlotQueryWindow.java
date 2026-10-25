@@ -11,15 +11,15 @@ import dev.gegy.whats_that_slot.ui.window.SlotQueryActions;
 import dev.gegy.whats_that_slot.ui.window.SlotQueryItems;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.RenderPipelines;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 
 import javax.annotation.Nullable;
 
 public final class ScrolledSlotQueryWindow implements SlotQueryWindow {
-    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(WhatsThatSlot.ID, "textures/gui/scrolled_window.png");
-    private static final ResourceLocation SCROLLER_SPRITE = ResourceLocation.withDefaultNamespace("container/creative_inventory/scroller");
-    private static final ResourceLocation SCROLLER_SELECTED_SPRITE = ResourceLocation.withDefaultNamespace("container/creative_inventory/scroller_disabled");
+    private static final Identifier TEXTURE = Identifier.fromNamespaceAndPath(WhatsThatSlot.ID, "textures/gui/scrolled_window.png");
+    private static final Identifier SCROLLER_SPRITE = Identifier.withDefaultNamespace("container/creative_inventory/scroller");
+    private static final Identifier SCROLLER_SELECTED_SPRITE = Identifier.withDefaultNamespace("container/creative_inventory/scroller_disabled");
 
     private static final int TEXTURE_WIDTH = 128;
     private static final int TEXTURE_HEIGHT = 128;
@@ -145,7 +145,7 @@ public final class ScrolledSlotQueryWindow implements SlotQueryWindow {
         return this.items.getHoveredItemAt(x, y);
     }
 
-    private void blitSprite(GuiGraphics graphics, Bounds2i bounds, ResourceLocation sprite) {
+    private void blitSprite(GuiGraphics graphics, Bounds2i bounds, Identifier sprite) {
         graphics.blitSprite(RenderPipelines.GUI_TEXTURED, sprite, bounds.x0(), bounds.y0(), bounds.width(), bounds.height());
     }
 }

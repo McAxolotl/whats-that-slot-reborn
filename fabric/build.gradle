@@ -1,5 +1,5 @@
 plugins {
-  id 'fabric-loom'
+  id 'net.fabricmc.fabric-loom-remap'
 }
 
 base {
@@ -37,7 +37,15 @@ repositories {
   }
   maven {
     url "https://maven.blamejared.com"
-    content { includeGroup 'mezz.jei' }
+    content {
+      includeGroup 'mezz.jei'
+      includeGroup 'net.mezzdev.config'
+    }
+    metadataSources {
+      mavenPom()
+      artifact()
+      ignoreGradleMetadataRedirection()
+    }
   }
 }
 

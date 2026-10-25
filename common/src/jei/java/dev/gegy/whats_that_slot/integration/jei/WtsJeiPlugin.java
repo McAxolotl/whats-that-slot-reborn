@@ -10,7 +10,7 @@ import mezz.jei.api.registration.IGuiHandlerRegistration;
 import mezz.jei.api.runtime.IClickableIngredient;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.Rect2i;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,8 +18,8 @@ import java.util.Optional;
 @JeiPlugin
 public final class WtsJeiPlugin implements IModPlugin {
     @Override
-    public ResourceLocation getPluginUid() {
-        return ResourceLocation.fromNamespaceAndPath(WhatsThatSlot.ID, "jei_plugin");
+    public Identifier getPluginUid() {
+        return Identifier.fromNamespaceAndPath(WhatsThatSlot.ID, "jei_plugin");
     }
 
     @Override
