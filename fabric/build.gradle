@@ -52,6 +52,8 @@ dependencies {
   compileOnly "me.shedaniel.cloth:basic-math:$cloth_version"
 
   if (providers.gradleProperty('withRei').get().toBoolean()) {
+    modLocalRuntime "net.fabricmc.fabric-api:fabric-api:$fabric_version"
+    modLocalRuntime "dev.architectury:architectury-fabric:$architectury_version"
     modLocalRuntime "me.shedaniel:RoughlyEnoughItems-fabric:$rei_version"
   }
 }
