@@ -6,6 +6,7 @@ import dev.gegy.whats_that_slot.ui.SlotQueryInput;
 import dev.gegy.whats_that_slot.ui.SlotQueryingScreen;
 import dev.gegy.whats_that_slot.ui.state.SlotQueryController;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.world.InteractionResult;
@@ -67,23 +68,23 @@ public class AbstractContainerScreenMixin implements SlotQueryingScreen {
         }
     }
 
-    @Inject(method = "mouseClicked(DDI)Z", at = @At("HEAD"), cancellable = true)
-    private void mouseClicked(double mouseX, double mouseY, int button, CallbackInfoReturnable<Boolean> ci) {
-        if (this.whats_that_slot$mouseClicked(mouseX, mouseY, button)) {
+    @Inject(method = "mouseClicked(Lnet/minecraft/client/input/MouseButtonEvent;Z)Z", at = @At("HEAD"), cancellable = true)
+    private void mouseClicked(MouseButtonEvent event, boolean doubleClick, CallbackInfoReturnable<Boolean> ci) {
+        if (this.whats_that_slot$mouseClicked(event.x(), event.y(), event.button())) {
             ci.setReturnValue(true);
         }
     }
 
-    @Inject(method = "mouseDragged(DDIDD)Z", at = @At("HEAD"), cancellable = true)
-    private void mouseDragged(double mouseX, double mouseY, int button, double deltaX, double deltaY, CallbackInfoReturnable<Boolean> ci) {
-        if (this.queryController.mouseDragged(mouseX, mouseY, button, deltaX, deltaY)) {
+    @Inject(method = "mouseDragged(Lnet/minecraft/client/input/MouseButtonEvent;DD)Z", at = @At("HEAD"), cancellable = true)
+    private void mouseDragged(MouseButtonEvent event, double deltaX, double deltaY, CallbackInfoReturnable<Boolean> ci) {
+        if (this.queryController.mouseDragged(event.x(), event.y(), event.button(), deltaX, deltaY)) {
             ci.setReturnValue(true);
         }
     }
 
-    @Inject(method = "mouseReleased(DDI)Z", at = @At("HEAD"), cancellable = true)
-    private void mouseReleased(double mouseX, double mouseY, int button, CallbackInfoReturnable<Boolean> ci) {
-        if (this.whats_that_slot$mouseReleased(mouseX, mouseY, button)) {
+    @Inject(method = "mouseReleased(Lnet/minecraft/client/input/MouseButtonEvent;)Z", at = @At("HEAD"), cancellable = true)
+    private void mouseReleased(MouseButtonEvent event, CallbackInfoReturnable<Boolean> ci) {
+        if (this.whats_that_slot$mouseReleased(event.x(), event.y(), event.button())) {
             ci.setReturnValue(true);
         }
     }

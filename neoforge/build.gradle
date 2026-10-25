@@ -46,9 +46,9 @@ sourceSets.main.java.srcDirs rootProject.file('common/src/main/java'), rootProje
 sourceSets.main.resources.srcDir rootProject.file('common/src/main/resources')
 
 dependencies {
-  compileOnly "mezz.jei:jei-$minecraft_version-common-api:$jei_version"
+  compileOnly "mezz.jei:jei-$jei_minecraft_version-common-api:$jei_version"
   if (providers.gradleProperty('withJei').get().toBoolean()) {
-    runtimeOnly "mezz.jei:jei-$minecraft_version-neoforge:$jei_version"
+    runtimeOnly "mezz.jei:jei-$jei_minecraft_version-neoforge:$jei_version"
   }
 
   implementation "net.neoforged:neoforge:$neoforge_version"

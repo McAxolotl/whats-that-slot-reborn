@@ -9,6 +9,6 @@ public final class SlotQueryInput {
     private static final int KEY = GLFW.GLFW_KEY_LEFT_ALT;
 
     public static boolean isRequestingQuery(Window window) {
-        return InputConstants.isKeyDown(window.getWindow(), KEY);
+        return InputConstants.isKeyDown(window, KEY);
     }
 }
