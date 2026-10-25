@@ -32,16 +32,20 @@ repositories {
     url "https://maven.architectury.dev"
     content { includeGroup 'dev.architectury' }
   }
-  maven {
-    url "https://maven.blamejared.com"
-    content {
+  exclusiveContent {
+    forRepository {
+      maven {
+        url "https://maven.blamejared.com"
+        metadataSources {
+          mavenPom()
+          artifact()
+          ignoreGradleMetadataRedirection()
+        }
+      }
+    }
+    filter {
       includeGroup 'mezz.jei'
       includeGroup 'net.mezzdev.config'
-    }
-    metadataSources {
-      mavenPom()
-      artifact()
-      ignoreGradleMetadataRedirection()
     }
   }
 }

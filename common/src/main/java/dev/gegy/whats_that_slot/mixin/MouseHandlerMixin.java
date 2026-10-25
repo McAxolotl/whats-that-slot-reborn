@@ -24,11 +24,11 @@ public class MouseHandlerMixin {
     // but after vanilla has updated activeButton so scrollbar dragging still works.
     @Inject(
             method = "onButton(JLnet/minecraft/client/input/MouseButtonInfo;I)V",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Minecraft;getOverlay()Lnet/minecraft/client/gui/screens/Overlay;", ordinal = 0),
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Gui;overlay()Lnet/minecraft/client/gui/screens/Overlay;", ordinal = 0),
             cancellable = true
     )
     private void onPopupMouseButton(long windowHandle, MouseButtonInfo buttonInfo, int action, CallbackInfo ci) {
-        if (this.minecraft.getOverlay() != null || !(this.minecraft.screen instanceof SlotQueryingScreen screen)) {
+        if (this.minecraft.gui.overlay() != null || !(this.minecraft.gui.screen() instanceof SlotQueryingScreen screen)) {
             return;
         }
         // Vanilla normalizes simulated right clicks before updating activeButton.
@@ -40,7 +40,7 @@ public class MouseHandlerMixin {
                 ? screen.whats_that_slot$mouseClicked(x, y, button)
                 : action == GLFW.GLFW_RELEASE && screen.whats_that_slot$mouseReleased(x, y, button);
         if (consumed) {
-            this.minecraft.screen.afterMouseAction();
+            this.minecraft.gui.screen().afterMouseAction();
             ci.cancel();
         }
     }

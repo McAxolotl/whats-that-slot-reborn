@@ -6,7 +6,6 @@
   "client": [
     "AbstractContainerScreenAccess",
     "AbstractContainerScreenMixin",
-    "AbstractFurnaceMenuAccess",
     "MouseHandlerMixin",
     "rei.ReiScreenRegistryMixin",
     "jei.JeiScreenHelperMixin"

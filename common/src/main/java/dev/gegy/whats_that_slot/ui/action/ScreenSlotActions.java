@@ -42,7 +42,7 @@ public final class ScreenSlotActions {
 
     private void executeNextAction(Minecraft client, AbstractContainerScreen<?> screen, Iterator<Action> iterator) {
         // Queued clicks must never target a menu that the player has already closed.
-        if (client.screen != screen || client.player == null
+        if (client.gui.screen() != screen || client.player == null
                 || client.player.containerMenu != screen.getMenu()) {
             return;
         }

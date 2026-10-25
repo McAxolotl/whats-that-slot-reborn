@@ -1,15 +1,14 @@
 package dev.gegy.whats_that_slot.query;
 
-import dev.gegy.whats_that_slot.mixin.AbstractFurnaceMenuAccess;
 import dev.gegy.whats_that_slot.query.recipe.RecipeItemResults;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.recipebook.SearchRecipeBookCategory;
+import net.minecraft.world.inventory.AbstractFurnaceMenu;
 import net.minecraft.world.inventory.FurnaceResultSlot;
 import net.minecraft.world.inventory.ResultSlot;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.display.SlotDisplayContext;
 
 import javax.annotation.Nullable;
@@ -33,15 +32,13 @@ public final class SlotMetadata {
             return SearchRecipeBookCategory.CRAFTING;
         } else if (slot instanceof FurnaceResultSlot) {
             var menu = screen.getMenu();
-            if (menu instanceof AbstractFurnaceMenuAccess furnace) {
-                var recipeType = furnace.getRecipeType();
-                if (recipeType == RecipeType.SMELTING) {
-                    return SearchRecipeBookCategory.FURNACE;
-                } else if (recipeType == RecipeType.SMOKING) {
-                    return SearchRecipeBookCategory.SMOKER;
-                } else if (recipeType == RecipeType.BLASTING) {
-                    return SearchRecipeBookCategory.BLAST_FURNACE;
-                }
+            if (menu instanceof AbstractFurnaceMenu furnace) {
+                return switch (furnace.getRecipeBookType()) {
+                    case FURNACE -> SearchRecipeBookCategory.FURNACE;
+                    case SMOKER -> SearchRecipeBookCategory.SMOKER;
+                    case BLAST_FURNACE -> SearchRecipeBookCategory.BLAST_FURNACE;
+                    default -> null;
+                };
             }
         }
         return null;
