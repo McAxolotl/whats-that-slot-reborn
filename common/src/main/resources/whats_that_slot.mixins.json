@@ -8,7 +8,8 @@
     "AbstractContainerScreenMixin",
     "AbstractFurnaceMenuAccess",
     "MouseHandlerMixin",
-    "rei.ReiScreenRegistryMixin"
+    "rei.ReiScreenRegistryMixin",
+    "jei.JeiScreenHelperMixin"
   ],
   "injectors": {
     "defaultRequire": 1

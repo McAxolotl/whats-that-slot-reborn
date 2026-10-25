@@ -8,6 +8,7 @@ base {
 
 loom {
   mixin {
+    useLegacyMixinAp.set(true)
     defaultRefmapName.set("${mod_id}.refmap.json")
   }
   runs {
@@ -34,9 +35,13 @@ repositories {
     url "https://maven.architectury.dev"
     content { includeGroup 'dev.architectury' }
   }
+  maven {
+    url "https://maven.blamejared.com"
+    content { includeGroup 'mezz.jei' }
+  }
 }
 
-sourceSets.main.java.srcDirs rootProject.file('common/src/main/java'), rootProject.file('common/src/rei/java')
+sourceSets.main.java.srcDirs rootProject.file('common/src/main/java'), rootProject.file('common/src/rei/java'), rootProject.file('common/src/jei/java')
 sourceSets.main.resources.srcDir rootProject.file('common/src/main/resources')
 
 dependencies {
@@ -51,9 +56,17 @@ dependencies {
   modCompileOnly("me.shedaniel:RoughlyEnoughItems-api-fabric:$rei_version") { transitive = false }
   modCompileOnly("dev.architectury:architectury-fabric:$architectury_version") { transitive = false }
   compileOnly "me.shedaniel.cloth:basic-math:$cloth_version"
+  modCompileOnly("mezz.jei:jei-$jei_minecraft_version-common-api:$jei_version") { transitive = false }
+
+  if (providers.gradleProperty('withRei').get().toBoolean() || providers.gradleProperty('withJei').get().toBoolean()) {
+    modLocalRuntime "net.fabricmc.fabric-api:fabric-api:$fabric_version"
+  }
+
+  if (providers.gradleProperty('withJei').get().toBoolean()) {
+    modLocalRuntime "mezz.jei:jei-$jei_minecraft_version-fabric:$jei_version"
+  }
 
   if (providers.gradleProperty('withRei').get().toBoolean()) {
-    modLocalRuntime "net.fabricmc.fabric-api:fabric-api:$fabric_version"
     modLocalRuntime "dev.architectury:architectury-fabric:$architectury_version"
     modLocalRuntime "me.shedaniel:RoughlyEnoughItems-fabric:$rei_version"
   }

@@ -42,7 +42,7 @@ repositories {
   }
 }
 
-sourceSets.main.java.srcDirs rootProject.file('common/src/main/java'), rootProject.file('common/src/rei/java')
+sourceSets.main.java.srcDirs rootProject.file('common/src/main/java'), rootProject.file('common/src/rei/java'), rootProject.file('common/src/jei/java')
 sourceSets.main.resources.srcDir rootProject.file('common/src/main/resources')
 
 dependencies {
